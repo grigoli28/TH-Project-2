@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Snake</title>
+</head>
+
+<body>
+    <div id="userInterface" class="user-interface">
+        <div class="container flex-cont">
+            <div>
+                <div class="flex-cont">
+                    <span>High Score:</span><b id="highScore"></b>
+                </div>
+                <div class="flex-cont">
+                    <span>Your Score:&nbsp;</span><b id="myScore"></b>
+                </div>
+                <div class="flex-cont">
+                    <label for="gameLevel">Level&nbsp;</label>
+                    <select id="gameLevel">
+                            <option id="novice" value="novice">Novice</option>
+                            <option id="intermediate" value="intermediate">Intermediate</option>
+                            <option id="hard" value="hard">Hard</option>
+                        </select>
+                    <label for="snakeSpeed">Speed&nbsp;</label>
+                    <input id="snakeSpeed" type="number" step="1" value="1">
+                </div>
+                <div class="flex-cont">
+                    <label for="boardWidth">Board Dimensions (W/H)&nbsp;</label>
+                    <input id="boardWidth" type="number" step="10" value="600">
+                    <input id="boardHeight" type="number" step="10" value="600">
+                </div>
+                <div class="flex-cont">
+                    <label for="snakeLength">Snake Length&nbsp;</label>
+                    <input id="snakeLength" type="number" step="1" value="3">
+                </div>
+                <div class="flex-cont">
+                    <label for="appleCount">Apples&nbsp;</label>
+                    <input id="appleCount" type="number" step="1" value="1">
+                </div>
+                <div class="flex-cont">
+                    <button id="save">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="flex-cont">
+            <button id="play" class="hidden">Start Game</button>
+            <canvas id="snakeGame" class="hidden" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <script src="src/UserSettings.js"></script>
+    <script src="src/Game.js"></script>
+    <script src="src/Apple.js"></script>
+    <script src="src/Snake.js"></script>
+    <script src="src/loadUserInterface.js"></script>
+    <script src="src/main.js"></script>
+</body>
+
+</html>

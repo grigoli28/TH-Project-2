@@ -1,0 +1,61 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* User Interface */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.flex-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+}
+
+.user-interface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+input {
+    margin: 5px;
+    padding: 5px;
+    width: 80px;
+}
+
+select {
+    margin: 5px;
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Game */
+
+#snakeGame {
+    border: 2px solid red;
+}
+
+#play {
+    position: absolute;
+    top: 50%;
+}
