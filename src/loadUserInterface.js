@@ -1,4 +1,4 @@
-const SCALE = 10;
+const SCALE = 15;
 
 const MAX_WIDTH = Math.floor(window.innerWidth / 10) * 10;
 const MAX_HEIGHT = Math.floor(window.innerHeight / 10) * 10;
@@ -13,7 +13,6 @@ const MIN_APPLES = 1;
 const MIN_LENGTH = 3;
 
 const DEFAULT_LEVEL = 'novice';
-
 
 let settings;
 

@@ -1,5 +1,7 @@
-const BODY_COLOR = 'blue';
-const HEAD_COLOR = 'black';
+const BODY_COLOR = 'green';
+const HEAD_COLOR = 'rgb(0, 80, 0)';
+const STROKE_COLOR = 'white';
+
 
 class Snake {
     constructor(length = 3, speed = 1) {
@@ -7,24 +9,26 @@ class Snake {
         this.body = [];
         this.direction = 'UP';
         for (let i = 1; i <= length; i++) {
-            this.body.unshift({ // Unshift as we want head to be at 0 index
-                x: (canvas.width / 2) - (canvas.width / 2 % SCALE), // choose middle spot on X axis
+            // Unshift as we want head coordinates to be at 0 index
+            this.body.unshift({
+                // Choose middle spot on X axis
+                x: (canvas.width / 2) - (canvas.width / 2 % SCALE),
+                // Choose spot on Y axis according to initial snake length
                 y: canvas.height - i * SCALE
             });
         }
     }
 
     draw() {
-        this.body.forEach((e, i) => {
-            ctx.fillStyle = (i == 0) ? HEAD_COLOR : BODY_COLOR;
-            ctx.fillRect(e.x, e.y, SCALE, SCALE);
+        this.body.forEach((bodyPart, index) => {
+            ctx.fillStyle = (index == 0) ? HEAD_COLOR : BODY_COLOR;
+            ctx.strokeStyle = STROKE_COLOR;
+            ctx.fillRect(bodyPart.x, bodyPart.y, SCALE, SCALE);
+            ctx.strokeRect(bodyPart.x, bodyPart.y, SCALE, SCALE);
         });
     }
 
     move() {
-
-
-        // for (let i = 0; i < 3; i++) {
         let nextHead = {
             x: this.body[0].x,
             y: this.body[0].y
@@ -33,7 +37,6 @@ class Snake {
         if (this.direction == "UP") nextHead.y -= SCALE;
         if (this.direction == "RIGHT") nextHead.x += SCALE;
         if (this.direction == "DOWN") nextHead.y += SCALE;
-        // debugger;
         if (this.collision(nextHead, this.body)) {
             game.stop();
         }
@@ -44,10 +47,8 @@ class Snake {
                 snake.grow(nextHead.x, nextHead.y);
             }
         });
-        this.body.pop();
+        this.pop();
         this.body.unshift(nextHead);
-        // }
-
     }
 
 
@@ -63,6 +64,13 @@ class Snake {
         }
     }
 
+
+    collision(head, body) {
+        if (this.bodyCollision(head, body) || this.wallCollision(head)) {
+            return true;
+        }
+        return false;
+    }
 
     bodyCollision(head, body) {
         for (let part of body) {
@@ -82,12 +90,6 @@ class Snake {
         return false;
     }
 
-    collision(head, body) {
-        if (this.bodyCollision(head, body) || this.wallCollision(head)) {
-            return true;
-        }
-        return false;
-    }
 
     grow(x, y) {
         this.body.unshift({ x, y });
@@ -97,6 +99,7 @@ class Snake {
         return this.body.pop();
     }
 
+    // !!!unused
     setSpeed(spd) {
         if (spd > 0) {
             this.speed = spd;
@@ -105,6 +108,7 @@ class Snake {
         }
     }
 
+    // !!!unused
     get length() {
         return this.body.length;
     }

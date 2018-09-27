@@ -27,18 +27,28 @@ let apples;
 
 let score = 0;
 
+let gameEnded = false;
 
+let levelControl = {
+    'novice': 10,
+    'intermediate': 20,
+    'hard': 30
+};
 
-let direction = {
-    '38': 'UP', // UP arrow
-    '40': 'DOWN', // DOWN arrow
-    '39': 'RIGHT', // RIGHT arrow
-    '37': 'LEFT', // Left arrow
+let directionControls = {
+    '38': 'UP', // arrow
+    '40': 'DOWN', // arrow
+    '39': 'RIGHT', // arrow
+    '37': 'LEFT', // arrow
     '87': 'UP', // W key
     '83': 'DOWN', // S key
     '68': 'RIGHT', // D key
     '65': 'LEFT', // A key
 };
+
+let appleImg = new Image();
+appleImg.src = 'img/apple.png';
+
 
 
 window.onload = function() {
@@ -65,11 +75,8 @@ window.onload = function() {
         playBtn.classList.add('hidden');
         game.start();
     });
-
-
-
-
 };
+
 
 function preloadGameData() {
     game = new Game();
@@ -86,13 +93,42 @@ function preloadGameData() {
 }
 
 
+/* ================================= */
+
+
+let fpsInterval;
+let now;
+let then;
+let elapsed;
+
+
+
+function startAnimating(fps) {
+    fpsInterval = 1000 / fps;
+    then = Date.now();
+    animateGame();
+}
+
+
+/* ================================= */
+
+
 
 
 function animateGame() {
-    draw();
-    snake.move();
     if (game.over) return;
     requestAnimationFrame(animateGame);
+
+    now = Date.now();
+    elapsed = now - then;
+
+
+    if (elapsed > fpsInterval) {
+        draw();
+        snake.move();
+
+        then = now - (elapsed % fpsInterval);
+    }
 }
 
 
@@ -108,7 +144,7 @@ function draw() {
 
 
 function snakeDirection(e) {
-    snake.setDirection(direction[e.keyCode]);
+    snake.setDirection(directionControls[e.keyCode]);
 }
 
 
@@ -127,4 +163,17 @@ function drawGameOver() {
 
 function displayCurrScore() {
     currScoreEl.textContent = score;
+}
+
+
+
+
+function gameStart() {
+
+}
+
+
+
+function gameOver() {
+
 }

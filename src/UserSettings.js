@@ -34,7 +34,7 @@ class UserSettings {
         func(this.boardWidth, this.boardHeight, this.gameLevel, this.snakeSpeed, this.snakeLength, this.appleCount);
     }
 
-/*     loadDefault() {
+    /* loadDefault() {
         if (!this.getFromStorage()) {
             // if no settings are saved in storage, load default settings
             this.configure();

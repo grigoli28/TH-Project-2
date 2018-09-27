@@ -13,9 +13,9 @@ class Game {
         }
     }
 
-
     start() {
-        animateGame();
+        // animateGame();
+        startAnimating(10);
     }
 
     stop() {
