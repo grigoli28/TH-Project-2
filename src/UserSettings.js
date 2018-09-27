@@ -9,7 +9,7 @@ class UserSettings {
     }
 
     isStoraged() {
-        return storage.getItem('user_settings_saved') == true;
+        return storage.getItem('user_settings_saved');
     }
 
     getFromStorage() {
@@ -21,7 +21,7 @@ class UserSettings {
         this.configure(boardWidth, boardHeight, gameLevel, snakeSpeed, snakeLength, appleCount);
     }
 
-    configure(width = MIN_WIDTH, height = MIN_HEIGHT, level = DEFAULT_LEVEL, speed = MIN_SPEED, length = MIN_LENGTH, apples = MIN_APPLES) {
+    configure(width = MIN_WIDTH, height = MIN_HEIGHT, level = MIN_LEVEL, speed = MIN_SPEED, length = MIN_LENGTH, apples = MIN_APPLES) {
         this.boardWidth = width - (width % SCALE);
         this.boardHeight = height - (height % SCALE);
         this.gameLevel = level;

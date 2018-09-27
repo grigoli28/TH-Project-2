@@ -1,7 +1,7 @@
-const SCALE = 19;
+const SCALE = 15;
 
-const MAX_WIDTH = window.innerWidth - (window.innerWidth % SCALE);
-const MAX_HEIGHT = window.innerHeight - (window.innerHeight % SCALE);
+const MAX_WIDTH = window.innerWidth /*  - (window.innerWidth % SCALE) */ ;
+const MAX_HEIGHT = window.innerHeight /*  - (window.innerHeight % SCALE) */ ;
 const MAX_SPEED = 3; // ???
 const MAX_APPLES = 20;
 const MAX_LENGTH = Math.floor(MAX_WIDTH / SCALE / 5); // ???
@@ -11,25 +11,26 @@ const MIN_HEIGHT = 400;
 const MIN_SPEED = 1; // ???
 const MIN_APPLES = 1;
 const MIN_LENGTH = 3;
-
-const DEFAULT_LEVEL = 'novice';
+const MIN_LEVEL = 'novice';
 
 let settings;
 
-let timeout = null;
+// let timeout = null;
 
-userInterface.addEventListener('input', () => {
+/* userInterface.addEventListener('input', () => {
     clearTimeout(timeout);
     timeout = setTimeout(saveSettings, 1000);
 }, false);
-
+ */
 
 function loadUserInterface() {
     saveBtn.addEventListener('click', () => {
         if (inputIsValid()) {
-            displayCanvas();
+            saveConfiguration();
         } else {
-            alert('Your settings Invalid! Please Enter Valid Settings!');
+            if (confirm('Your Settings Are Invalid! Load Default Settings?')) {
+                settings.reset();
+            }
         }
     });
 
@@ -37,6 +38,7 @@ function loadUserInterface() {
 
     restrictUserInputs();
 
+    // If settings were previously saved, load them
     if (settings.isStoraged()) {
         settings.import();
         settings.load(loadInBrowser);
@@ -44,29 +46,44 @@ function loadUserInterface() {
 }
 
 
-function displayCanvas() {
+function saveConfiguration() {
     saveSettings();
-    userInterface.classList.add('hidden');
-    canvas.width = widthInput.value - (widthInput.value % SCALE);
-    canvas.height = heightInput.value - (heightInput.value % SCALE);
-    canvas.classList.remove('hidden');
+    hideUI();
+    showCanvas();
+    /*canvas.width = widthInput.value - (widthInput.value % SCALE);
+    canvas.height = heightInput.value - (heightInput.value % SCALE); */
+    setCanvasDimensions(settings.boardWidth, settings.boardHeight);
+    showPlayGameBtn();
+}
+
+
+function showPlayGameBtn() {
     playBtn.classList.remove('hidden');
+}
+
+function hideUI() {
+    userInterface.classList.add('hidden');
+}
+
+function showCanvas() {
+    canvas.classList.remove('hidden');
+}
+
+
+function setCanvasDimensions(width, height) {
+    canvas.width = width;
+    canvas.height = height;
 }
 
 
 function saveSettings() {
-    if (!inputIsValid()) {
-        alert('Your settings Invalid! Please Enter Valid Settings!');
-    } else {
-        settings.configure(
-            widthInput.value,
-            heightInput.value,
-            levelInput.value,
-            speedInput.value,
-            lengthInput.value,
-            appleInput.value
-        );
-    }
+    settings.configure(
+        widthInput.value,
+        heightInput.value,
+        levelInput.value,
+        speedInput.value,
+        lengthInput.value
+    );
     settings.saveToStorage();
 }
 
@@ -99,8 +116,8 @@ function restrictUserInputs() {
 
 
 function loadInBrowser(width, height, level, speed, length, apples) {
-    widthInput.value = width > MAX_WIDTH ? MAX_WIDTH : width;
-    heightInput.value = height > MAX_HEIGHT ? MAX_HEIGHT : height;
+    widthInput.value = width;
+    heightInput.value = height;
     document.getElementById(`${level}`).selected = true;
     speedInput.value = speed;
     lengthInput.value = length;
