@@ -14,10 +14,10 @@ class Game {
     }
 
     stop() {
-        dead.play();
-        showInterface();
-        drawGameOver();
-        displayCurrScore();
         this.over = true;
+        dead.play();
+        drawGameOver();
+        showInterface();
+        displayCurrScore();
     }
 }

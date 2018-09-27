@@ -67,6 +67,8 @@ let stopAnimID;
 
 
 window.onload = function() {
+    document.body.style.height = `${window.innerHeight}px`; // Give body max visible height, so we can display canvas in the center of screen
+
     canvas = document.getElementById('snakeGame');
     ctx = canvas.getContext('2d');
 

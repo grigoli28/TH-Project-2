@@ -9,7 +9,7 @@ class UserSettings {
     }
 
     isStoraged() {
-        return storage.getItem('user_settings_saved');
+        return storage.getItem('user_settings_saved') == true;
     }
 
     getFromStorage() {
@@ -22,8 +22,8 @@ class UserSettings {
     }
 
     configure(width = MIN_WIDTH, height = MIN_HEIGHT, level = DEFAULT_LEVEL, speed = MIN_SPEED, length = MIN_LENGTH, apples = MIN_APPLES) {
-        this.boardWidth = Math.floor(width / 10) * 10;
-        this.boardHeight = Math.floor(height / 10) * 10;
+        this.boardWidth = width - (width % SCALE);
+        this.boardHeight = height - (height % SCALE);
         this.gameLevel = level;
         this.snakeSpeed = Math.floor(speed);
         this.snakeLength = Math.floor(length);
@@ -33,14 +33,4 @@ class UserSettings {
     load(func) {
         func(this.boardWidth, this.boardHeight, this.gameLevel, this.snakeSpeed, this.snakeLength, this.appleCount);
     }
-
-    /* loadDefault() {
-        if (!this.getFromStorage()) {
-            // if no settings are saved in storage, load default settings
-            this.configure();
-        } else {
-            // if settings were previously saved in storage, import them;
-            this.import();
-        }
-    } */
 }

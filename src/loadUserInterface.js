@@ -1,14 +1,14 @@
-const SCALE = 15;
+const SCALE = 19;
 
-const MAX_WIDTH = Math.floor(window.innerWidth / 10) * 10;
-const MAX_HEIGHT = Math.floor(window.innerHeight / 10) * 10;
-const MAX_SPEED = 3;
+const MAX_WIDTH = window.innerWidth - (window.innerWidth % SCALE);
+const MAX_HEIGHT = window.innerHeight - (window.innerHeight % SCALE);
+const MAX_SPEED = 3; // ???
 const MAX_APPLES = 20;
-const MAX_LENGTH = MAX_WIDTH / SCALE / 4;
+const MAX_LENGTH = Math.floor(MAX_WIDTH / SCALE / 5); // ???
 
-const MIN_WIDTH = 300;
-const MIN_HEIGHT = 300;
-const MIN_SPEED = 1;
+const MIN_WIDTH = 400;
+const MIN_HEIGHT = 400;
+const MIN_SPEED = 1; // ???
 const MIN_APPLES = 1;
 const MIN_LENGTH = 3;
 
@@ -47,8 +47,8 @@ function loadUserInterface() {
 function displayCanvas() {
     saveSettings();
     userInterface.classList.add('hidden');
-    canvas.width = widthInput.value;
-    canvas.height = heightInput.value;
+    canvas.width = widthInput.value - (widthInput.value % SCALE);
+    canvas.height = heightInput.value - (heightInput.value % SCALE);
     canvas.classList.remove('hidden');
     playBtn.classList.remove('hidden');
 }

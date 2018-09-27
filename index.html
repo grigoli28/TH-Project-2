@@ -22,17 +22,17 @@
                 <div class="flex-cont">
                     <label for="gameLevel">Level&nbsp;</label>
                     <select id="gameLevel">
-                            <option id="novice" value="novice">Novice</option>
-                            <option id="intermediate" value="intermediate">Intermediate</option>
-                            <option id="hard" value="hard">Hard</option>
+                            <option id="novice" value="novice">NOVICE</option>
+                            <option id="intermediate" value="intermediate">INTERMEDIATE</option>
+                            <option id="hard" value="hard">HARD</option>
                         </select>
                     <label for="snakeSpeed">Speed&nbsp;</label>
                     <input id="snakeSpeed" type="number" step="1" value="1">
                 </div>
                 <div class="flex-cont">
                     <label for="boardWidth">Board Dimensions (W/H)&nbsp;</label>
-                    <input id="boardWidth" type="number" step="10" value="600">
-                    <input id="boardHeight" type="number" step="10" value="600">
+                    <input id="boardWidth" type="number" step="20" value="600">
+                    <input id="boardHeight" type="number" step="20" value="600">
                 </div>
                 <div class="flex-cont">
                     <label for="snakeLength">Snake Length&nbsp;</label>
@@ -50,7 +50,7 @@
     </div>
 
 
-    <div class="container">
+    <div class="container flex-cont">
         <div class="flex-cont">
             <button id="play" class="hidden">Start Game</button>
             <canvas id="snakeGame" class="hidden" width="400" height="400"></canvas>
