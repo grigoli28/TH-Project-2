@@ -15,7 +15,6 @@ class Game {
 
     start() {
         // animateGame();
-        startAnimating(10);
     }
 
     stop() {

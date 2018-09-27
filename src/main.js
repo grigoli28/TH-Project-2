@@ -35,7 +35,7 @@ let levelControl = {
     'hard': 30
 };
 
-let directionControls = {
+let directionKeyMap = {
     '38': 'UP', // arrow
     '40': 'DOWN', // arrow
     '39': 'RIGHT', // arrow
@@ -48,6 +48,14 @@ let directionControls = {
 
 let appleImg = new Image();
 appleImg.src = 'img/apple.png';
+
+
+
+let fpsInterval;
+let now;
+let then;
+let elapsed;
+
 
 
 
@@ -73,9 +81,12 @@ window.onload = function() {
 
     playBtn.addEventListener('click', () => {
         playBtn.classList.add('hidden');
-        game.start();
+        startAnimating(levelControl[settings.gameLevel]);
     });
 };
+
+
+
 
 
 function preloadGameData() {
@@ -93,33 +104,26 @@ function preloadGameData() {
 }
 
 
-/* ================================= */
 
-
-let fpsInterval;
-let now;
-let then;
-let elapsed;
 
 
 
 function startAnimating(fps) {
     fpsInterval = 1000 / fps;
-    then = Date.now();
+    then = window.performance.now();
     animateGame();
 }
 
 
-/* ================================= */
 
 
 
 
-function animateGame() {
+function animateGame(timeFrame) {
     if (game.over) return;
     requestAnimationFrame(animateGame);
 
-    now = Date.now();
+    now = timeFrame;
     elapsed = now - then;
 
 
@@ -144,7 +148,7 @@ function draw() {
 
 
 function snakeDirection(e) {
-    snake.setDirection(directionControls[e.keyCode]);
+    snake.setDirection(directionKeyMap[e.keyCode]);
 }
 
 
@@ -163,17 +167,4 @@ function drawGameOver() {
 
 function displayCurrScore() {
     currScoreEl.textContent = score;
-}
-
-
-
-
-function gameStart() {
-
-}
-
-
-
-function gameOver() {
-
 }

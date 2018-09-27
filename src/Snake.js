@@ -1,4 +1,4 @@
-const BODY_COLOR = 'green';
+const BODY_COLOR = 'rgb(0, 155, 0)';
 const HEAD_COLOR = 'rgb(0, 80, 0)';
 const STROKE_COLOR = 'white';
 
@@ -29,26 +29,26 @@ class Snake {
     }
 
     move() {
-        let nextHead = {
+        let newHead = {
             x: this.body[0].x,
             y: this.body[0].y
         };
-        if (this.direction == "LEFT") nextHead.x -= SCALE;
-        if (this.direction == "UP") nextHead.y -= SCALE;
-        if (this.direction == "RIGHT") nextHead.x += SCALE;
-        if (this.direction == "DOWN") nextHead.y += SCALE;
-        if (this.collision(nextHead, this.body)) {
+        if (this.direction == "LEFT") newHead.x -= SCALE;
+        if (this.direction == "UP") newHead.y -= SCALE;
+        if (this.direction == "RIGHT") newHead.x += SCALE;
+        if (this.direction == "DOWN") newHead.y += SCALE;
+        if (this.collision(newHead, this.body)) {
             game.stop();
         }
         apples.forEach((apple) => {
-            if (nextHead.x == apple.x && nextHead.y == apple.y) {
+            if (newHead.x == apple.x && newHead.y == apple.y) {
                 score += APPLE_SCORE;
                 apple.remove();
-                snake.grow(nextHead.x, nextHead.y);
+                snake.grow(newHead.x, newHead.y);
             }
         });
         this.pop();
-        this.body.unshift(nextHead);
+        this.body.unshift(newHead);
     }
 
 
@@ -88,6 +88,25 @@ class Snake {
             return true;
         }
         return false;
+    }
+
+
+    eats(head, apples) {
+        for (let apple of apples) {
+            if (head.x == apple.x && head.y == apple.y) {
+                score += APPLE_SCORE;
+                apple.remove();
+                snake.grow(nextHead.x, nextHead.y);
+            }
+        }
+
+        apples.forEach((apple) => {
+            if (nextHead.x == apple.x && nextHead.y == apple.y) {
+                score += APPLE_SCORE;
+                apple.remove();
+                snake.grow(nextHead.x, nextHead.y);
+            }
+        });
     }
 
 
