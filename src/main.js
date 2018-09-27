@@ -1,5 +1,7 @@
 const APPLE_SCORE = 10;
 
+const STORAGE = window.localStorage;
+
 let saveBtn,
     playBtn,
     userInterface;
@@ -17,8 +19,6 @@ let canvas,
 let highScoreEl,
     currScoreEl;
 
-let storage = window.localStorage;
-
 let game;
 
 let snake;
@@ -29,11 +29,13 @@ let score = 0;
 
 let gameEnded = false;
 
+
 let levelControl = {
     'novice': 10,
     'intermediate': 20,
     'hard': 30
 };
+
 
 let directionKeyMap = {
     '38': 'UP', // arrow
@@ -46,8 +48,11 @@ let directionKeyMap = {
     '65': 'LEFT', // A key
 };
 
+
+
 let appleImg = new Image();
 appleImg.src = 'img/apple.png';
+
 
 let dead = new Audio();
 let eat = new Audio();
@@ -89,7 +94,7 @@ window.onload = function() {
     saveBtn.addEventListener('click', preloadGameData);
 
     playBtn.addEventListener('click', () => {
-        playBtn.classList.add('hidden');
+        hidePlayBtn();
         startAnimating(levelControl[settings.gameLevel]);
     });
 };
@@ -101,7 +106,7 @@ function preloadGameData() {
     snake = new Snake(settings.snakeLength);
 
 
-    apples = [];
+    apples = []; // ???
     for (let i = 0; i < settings.appleCount; i++) {
         apples.push(new Apple());
     }
@@ -110,19 +115,11 @@ function preloadGameData() {
 }
 
 
-
-
-
-
 function startAnimating(fps) {
     fpsInterval = 1000 / fps;
     then = window.performance.now();
     animateGame();
 }
-
-
-
-
 
 
 function animateGame(timeFrame) {
@@ -152,14 +149,9 @@ function draw() {
 }
 
 
-
-
 function setSnakeDirection(e) {
     snake.setDirection(directionKeyMap[e.keyCode]);
 }
-
-
-
 
 
 function drawGameOver() {
@@ -171,7 +163,11 @@ function drawGameOver() {
 }
 
 
-
 function displayCurrScore() {
     currScoreEl.textContent = score;
+}
+
+
+function hidePlayBtn() {
+    playBtn.classList.add('hidden');
 }

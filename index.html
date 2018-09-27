@@ -14,35 +14,48 @@
     <div id="userInterface" class="user-interface">
         <div class="container flex-cont">
             <div>
+                <!-- High Score -->
                 <div class="flex-cont">
                     <span>High Score&nbsp;<i class="fas fa-trophy"></i></span><b id="highScore"></b>
                 </div>
+                <!-- Current Score -->
                 <div class="flex-cont">
                     <span>Your Score:&nbsp;</span><b id="myScore"></b>
                 </div>
                 <div class="flex-cont">
+                    <!-- Level -->
                     <label for="gameLevel">Level&nbsp;</label>
                     <select id="gameLevel">
                             <option id="novice" value="novice">NOVICE</option>
                             <option id="intermediate" value="intermediate">INTERMEDIATE</option>
                             <option id="hard" value="hard">HARD</option>
                         </select>
+                    <!-- Speed -->
                     <label for="snakeSpeed">Speed&nbsp;</label>
                     <input id="snakeSpeed" type="number" step="1" value="1">
+
+                    <!-- Sound -->
+                    <span for="snakeSpeed">Sound&nbsp;</span>
+                    <i class="fas fa-volume-up"></i>
+                    <i class="fas fa-volume-off hidden"></i>
                 </div>
+                <!-- Board Dimensions -->
                 <div class="flex-cont">
                     <label for="boardWidth">Board Dimensions (W/H)&nbsp;</label>
                     <input id="boardWidth" type="number" step="20" value="600">
                     <input id="boardHeight" type="number" step="20" value="600">
                 </div>
+                <!-- Snake Length -->
                 <div class="flex-cont">
                     <label for="snakeLength">Snake Length&nbsp;</label>
                     <input id="snakeLength" type="number" step="1" value="3">
                 </div>
+                <!-- Apple Count -->
                 <div class="flex-cont">
                     <label for="appleCount">Apples&nbsp;</label>
                     <input id="appleCount" type="number" step="1" value="1">
                 </div>
+                <!-- Save Button -->
                 <div class="flex-cont">
                     <button id="save">Save Settings</button>
                 </div>

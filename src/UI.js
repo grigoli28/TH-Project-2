@@ -1,7 +1,7 @@
-const SCALE = 15;
+const SCALE = 20;
 
-const MAX_WIDTH = window.innerWidth /*  - (window.innerWidth % SCALE) */ ;
-const MAX_HEIGHT = window.innerHeight /*  - (window.innerHeight % SCALE) */ ;
+const MAX_WIDTH = window.innerWidth;
+const MAX_HEIGHT = window.innerHeight;
 const MAX_SPEED = 3; // ???
 const MAX_APPLES = 20;
 const MAX_LENGTH = Math.floor(MAX_WIDTH / SCALE / 5); // ???
@@ -15,21 +15,15 @@ const MIN_LEVEL = 'novice';
 
 let settings;
 
-// let timeout = null;
-
-/* userInterface.addEventListener('input', () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(saveSettings, 1000);
-}, false);
- */
 
 function loadUserInterface() {
     saveBtn.addEventListener('click', () => {
         if (inputIsValid()) {
             saveConfiguration();
         } else {
-            if (confirm('Your Settings Are Invalid! Load Default Settings?')) {
-                settings.reset();
+            if (confirm('Your Settings Are Invalid! Load Defaults?')) {
+                // Load previous settings
+                settings.load(loadInBrowser);
             }
         }
     });
@@ -50,33 +44,13 @@ function saveConfiguration() {
     saveSettings();
     hideUI();
     showCanvas();
-    /*canvas.width = widthInput.value - (widthInput.value % SCALE);
-    canvas.height = heightInput.value - (heightInput.value % SCALE); */
     setCanvasDimensions(settings.boardWidth, settings.boardHeight);
     showPlayGameBtn();
 }
 
 
-function showPlayGameBtn() {
-    playBtn.classList.remove('hidden');
-}
-
-function hideUI() {
-    userInterface.classList.add('hidden');
-}
-
-function showCanvas() {
-    canvas.classList.remove('hidden');
-}
-
-
-function setCanvasDimensions(width, height) {
-    canvas.width = width;
-    canvas.height = height;
-}
-
-
 function saveSettings() {
+    // Save settings from inputs
     settings.configure(
         widthInput.value,
         heightInput.value,
@@ -115,6 +89,7 @@ function restrictUserInputs() {
 }
 
 
+// Callback function that gets settings as parameters
 function loadInBrowser(width, height, level, speed, length, apples) {
     widthInput.value = width;
     heightInput.value = height;
@@ -122,6 +97,27 @@ function loadInBrowser(width, height, level, speed, length, apples) {
     speedInput.value = speed;
     lengthInput.value = length;
     appleInput.value = apples;
+}
+
+
+function showPlayGameBtn() {
+    playBtn.classList.remove('hidden');
+}
+
+
+function hideUI() {
+    userInterface.classList.add('hidden');
+}
+
+
+function showCanvas() {
+    canvas.classList.remove('hidden');
+}
+
+
+function setCanvasDimensions(width, height) {
+    canvas.width = width;
+    canvas.height = height;
 }
 
 

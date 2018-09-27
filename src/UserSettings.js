@@ -4,16 +4,16 @@ class UserSettings {
     }
 
     saveToStorage() {
-        storage.setItem('user_settings_saved', true);
-        storage.setItem('snake_user_settings', JSON.stringify(this));
+        STORAGE.setItem('user_settings_saved', true);
+        STORAGE.setItem('snake_user_settings', JSON.stringify(this));
     }
 
     isStoraged() {
-        return storage.getItem('user_settings_saved');
+        return STORAGE.getItem('user_settings_saved');
     }
 
     getFromStorage() {
-        return JSON.parse(storage.getItem('snake_user_settings'));
+        return JSON.parse(STORAGE.getItem('snake_user_settings'));
     }
 
     import () {
