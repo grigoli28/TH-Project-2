@@ -21,10 +21,53 @@ class Snake {
 
     draw() {
         this.body.forEach((bodyPart, index) => {
-            ctx.fillStyle = (index == 0) ? HEAD_COLOR : BODY_COLOR;
+            ctx.fillStyle = (index == 0) ? BODY_COLOR : BODY_COLOR;
             ctx.strokeStyle = STROKE_COLOR;
             ctx.fillRect(bodyPart.x, bodyPart.y, SCALE, SCALE);
             ctx.strokeRect(bodyPart.x, bodyPart.y, SCALE, SCALE);
+            if (index == 0) {
+                /* Left Eye Outer Circle */
+                ctx.beginPath();
+                ctx.fillStyle = 'white';
+                ctx.arc(bodyPart.x + SCALE / 4, bodyPart.y + SCALE / 4, SCALE / 5, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                /* Left Eye Inner Circle */
+                ctx.beginPath();
+                ctx.fillStyle = 'black';
+                ctx.arc(bodyPart.x + SCALE / 4, bodyPart.y + SCALE / 4, SCALE / 10, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                /* Right Eye Outer Circle */
+                ctx.beginPath();
+                ctx.fillStyle = 'white';
+                ctx.arc(bodyPart.x + SCALE * 3 / 4, bodyPart.y + SCALE / 4, SCALE / 5, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                /* Right Eye Inner Circle */
+                ctx.beginPath();
+                ctx.fillStyle = 'black';
+                ctx.arc(bodyPart.x + SCALE * 3 / 4, bodyPart.y + SCALE / 4, SCALE / 10, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+
+                /* Mouth */
+                ctx.beginPath();
+                ctx.strokeStyle = 'white';
+                ctx.arc(bodyPart.x + SCALE / 2, bodyPart.y + SCALE * 5 / 8, SCALE / 4, 0, 1 * Math.PI);
+                ctx.stroke();
+                ctx.closePath();
+            } else {
+                /* Red Circle on other bodyparts */
+                ctx.beginPath();
+                ctx.fillStyle = 'red';
+                ctx.arc(bodyPart.x + SCALE / 2, bodyPart.y + SCALE / 2, SCALE / 4, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.closePath();
+            }
         });
     }
 
@@ -39,7 +82,7 @@ class Snake {
         if (this.direction == "RIGHT") newHead.x += SCALE;
         if (this.direction == "DOWN") newHead.y += SCALE;
 
-        this.eat(newHead, apples);
+        this.eats(newHead, apples);
 
         if (this.collision(newHead, this.body)) {
             game.stop();
@@ -48,10 +91,11 @@ class Snake {
         this.grow(newHead);
     }
 
-    eat(head, apples) {
+    eats(head, apples) {
         for (let apple of apples) {
             if (head.x == apple.x && head.y == apple.y) {
                 score += APPLE_SCORE;
+                eat.play();
                 apple.remove();
                 return;
             }

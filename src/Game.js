@@ -13,14 +13,11 @@ class Game {
         }
     }
 
-    start() {
-        // animateGame();
-    }
-
     stop() {
+        dead.play();
         showInterface();
-        this.over = true;
         drawGameOver();
         displayCurrScore();
+        this.over = true;
     }
 }

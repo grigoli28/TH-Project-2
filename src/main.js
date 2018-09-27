@@ -49,6 +49,12 @@ let directionKeyMap = {
 let appleImg = new Image();
 appleImg.src = 'img/apple.png';
 
+let dead = new Audio();
+let eat = new Audio();
+
+dead.src = 'audio/dead.mp3';
+eat.src = 'audio/eat.mp3';
+
 
 
 let fpsInterval;
@@ -56,6 +62,8 @@ let now;
 let then;
 let elapsed;
 
+
+let stopAnimID;
 
 
 window.onload = function() {
@@ -83,9 +91,6 @@ window.onload = function() {
         startAnimating(levelControl[settings.gameLevel]);
     });
 };
-
-
-
 
 
 function preloadGameData() {
@@ -119,18 +124,19 @@ function startAnimating(fps) {
 
 
 function animateGame(timeFrame) {
-    if (game.over) return;
-    requestAnimationFrame(animateGame);
+    stopAnimID = requestAnimationFrame(animateGame);
 
     now = timeFrame;
     elapsed = now - then;
-
 
     if (elapsed > fpsInterval) {
         draw();
         snake.move();
 
         then = now - (elapsed % fpsInterval);
+    }
+    if (game.over) {
+        cancelAnimationFrame(stopAnimID);
     }
 }
 
