@@ -33,24 +33,39 @@ class Snake {
             x: this.body[0].x,
             y: this.body[0].y
         };
+
         if (this.direction == "LEFT") newHead.x -= SCALE;
         if (this.direction == "UP") newHead.y -= SCALE;
         if (this.direction == "RIGHT") newHead.x += SCALE;
         if (this.direction == "DOWN") newHead.y += SCALE;
+
+        this.eat(newHead, apples);
+
         if (this.collision(newHead, this.body)) {
             game.stop();
         }
-        apples.forEach((apple) => {
-            if (newHead.x == apple.x && newHead.y == apple.y) {
+
+        this.grow(newHead);
+    }
+
+    eat(head, apples) {
+        for (let apple of apples) {
+            if (head.x == apple.x && head.y == apple.y) {
                 score += APPLE_SCORE;
                 apple.remove();
-                snake.grow(newHead.x, newHead.y);
+                return;
             }
-        });
+        }
         this.pop();
+    }
+
+    grow(newHead) {
         this.body.unshift(newHead);
     }
 
+    pop() {
+        return this.body.pop();
+    }
 
     setDirection(direction) {
         if (direction == 'LEFT' && this.direction != 'RIGHT') {
@@ -63,7 +78,6 @@ class Snake {
             this.direction = 'DOWN';
         }
     }
-
 
     collision(head, body) {
         if (this.bodyCollision(head, body) || this.wallCollision(head)) {
@@ -81,54 +95,11 @@ class Snake {
         return false;
     }
 
-
     wallCollision(head) {
         if (head.x >= canvas.width || head.x < 0 ||
             head.y >= canvas.height || head.y < 0) {
             return true;
         }
         return false;
-    }
-
-
-    eats(head, apples) {
-        for (let apple of apples) {
-            if (head.x == apple.x && head.y == apple.y) {
-                score += APPLE_SCORE;
-                apple.remove();
-                snake.grow(nextHead.x, nextHead.y);
-            }
-        }
-
-        apples.forEach((apple) => {
-            if (nextHead.x == apple.x && nextHead.y == apple.y) {
-                score += APPLE_SCORE;
-                apple.remove();
-                snake.grow(nextHead.x, nextHead.y);
-            }
-        });
-    }
-
-
-    grow(x, y) {
-        this.body.unshift({ x, y });
-    }
-
-    pop() {
-        return this.body.pop();
-    }
-
-    // !!!unused
-    setSpeed(spd) {
-        if (spd > 0) {
-            this.speed = spd;
-        } else {
-            throw new Error(`Speed can't have negative value`);
-        }
-    }
-
-    // !!!unused
-    get length() {
-        return this.body.length;
     }
 }

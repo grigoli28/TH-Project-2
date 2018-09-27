@@ -58,7 +58,6 @@ let elapsed;
 
 
 
-
 window.onload = function() {
     canvas = document.getElementById('snakeGame');
     ctx = canvas.getContext('2d');
@@ -100,7 +99,7 @@ function preloadGameData() {
         apples.push(new Apple());
     }
 
-    document.addEventListener('keydown', snakeDirection);
+    document.addEventListener('keydown', setSnakeDirection);
 }
 
 
@@ -147,7 +146,7 @@ function draw() {
 
 
 
-function snakeDirection(e) {
+function setSnakeDirection(e) {
     snake.setDirection(directionKeyMap[e.keyCode]);
 }
 
