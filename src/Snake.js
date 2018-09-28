@@ -95,7 +95,8 @@ class Snake {
         for (let apple of apples) {
             if (head.x == apple.x && head.y == apple.y) {
                 score += APPLE_SCORE;
-                eat.play();
+                if (soundEnabled)
+                    eat.play();
                 apple.remove();
                 return;
             }

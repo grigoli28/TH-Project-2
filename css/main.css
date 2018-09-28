@@ -59,3 +59,23 @@ select {
     position: absolute;
     top: 50%;
 }
+
+
+/* Sound */
+
+.sound-on,
+.sound-off {
+    padding: 5px;
+}
+
+.sound-on::before {
+    content: "\f028";
+    font-family: "Font Awesome\ 5 Free";
+    font-weight: 900;
+}
+
+.sound-off::after {
+    content: "\f026";
+    font-family: "Font Awesome\ 5 Free";
+    font-weight: 900;
+}

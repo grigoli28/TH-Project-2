@@ -15,7 +15,8 @@ class Game {
 
     stop() {
         this.over = true;
-        dead.play();
+        if (soundEnabled)
+            dead.play();
         drawGameOver();
         showInterface();
         displayCurrScore();

@@ -6,8 +6,8 @@ const MAX_SPEED = 3; // ???
 const MAX_APPLES = 20;
 const MAX_LENGTH = Math.floor(MAX_WIDTH / SCALE / 5); // ???
 
-const MIN_WIDTH = 400;
-const MIN_HEIGHT = 400;
+const MIN_WIDTH = 300;
+const MIN_HEIGHT = 300;
 const MIN_SPEED = 1; // ???
 const MIN_APPLES = 1;
 const MIN_LENGTH = 3;
@@ -23,7 +23,7 @@ function loadUserInterface() {
         } else {
             if (confirm('Your Settings Are Invalid! Load Defaults?')) {
                 // Load previous settings
-                settings.load(loadInBrowser);
+                settings.load(loadInBrowser); // !!!review
             }
         }
     });

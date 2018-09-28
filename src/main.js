@@ -60,7 +60,7 @@ let eat = new Audio();
 dead.src = 'audio/dead.mp3';
 eat.src = 'audio/eat.mp3';
 
-
+let soundEnabled = true;
 
 let fpsInterval;
 let now;
@@ -79,13 +79,19 @@ window.onload = function() {
 
     saveBtn = document.getElementById('save');
     playBtn = document.getElementById('play');
+
+    sound = document.getElementById('sound');
+    soundBtn = document.getElementById('sound-control');
+
     userInterface = document.getElementById('userInterface');
+
     widthInput = document.getElementById('boardWidth');
     heightInput = document.getElementById('boardHeight');
     levelInput = document.getElementById('gameLevel');
     speedInput = document.getElementById('snakeSpeed');
     lengthInput = document.getElementById('snakeLength');
     appleInput = document.getElementById('appleCount');
+
     highScoreEl = document.getElementById('highScore');
     currScoreEl = document.getElementById('myScore');
 
@@ -97,6 +103,10 @@ window.onload = function() {
         hidePlayBtn();
         startAnimating(levelControl[settings.gameLevel]);
     });
+
+
+    sound.addEventListener('click', soundControl);
+    soundBtn.addEventListener('click', soundControl);
 };
 
 
@@ -170,4 +180,12 @@ function displayCurrScore() {
 
 function hidePlayBtn() {
     playBtn.classList.add('hidden');
+}
+
+
+function soundControl({ target }) {
+    soundEnabled = !soundEnabled;
+    target.classList.toggle('sound-on');
+    target.classList.toggle('sound-off');
+    console.log(soundEnabled);
 }
