@@ -14,7 +14,7 @@ let canvas,
 let highScoreEl,
     currScoreEl;
 
-let game, snake, apples;
+let game, snake, appleArr;
 
 let score = 0;
 
@@ -104,11 +104,11 @@ function preloadGameData() {
 
     snake = new Snake(settings.snakeLength);
 
-
-    apples = []; // ???
-    for (let i = 0; i < settings.appleCount; i++) {
-        apples.push(new Apple());
-    }
+    appleArr = new AppleArray(settings.appleCount);
+    // apples = []; // ???
+    // for (let i = 0; i < settings.appleCount; i++) {
+        // apples.push(new Apple());
+    // }
 
     document.addEventListener('keydown', setSnakeDirection);
 }
@@ -141,9 +141,10 @@ function animateGame(timeFrame) {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    apples.forEach((apple) => {
-        apple.draw();
-    });
+    appleArr.draw();
+    // apples.forEach((apple) => {
+        // apple.draw();
+    // });
     snake.draw();
 }
 

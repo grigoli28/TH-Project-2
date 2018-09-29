@@ -82,7 +82,7 @@ class Snake {
         if (this.direction == "RIGHT") newHead.x += SCALE;
         if (this.direction == "DOWN") newHead.y += SCALE;
 
-        this.eats(newHead, apples);
+        this.eats(newHead, appleArr);
 
         if (this.collision(newHead, this.body)) {
             game.stop();
@@ -91,8 +91,8 @@ class Snake {
         this.grow(newHead);
     }
 
-    eats(head, apples) {
-        for (let apple of apples) {
+    eats(head, appleArr) {
+        for (let apple of appleArr.apples) {
             if (head.x == apple.x && head.y == apple.y) {
                 score += APPLE_SCORE;
                 if (soundEnabled)

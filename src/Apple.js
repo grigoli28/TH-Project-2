@@ -30,3 +30,21 @@ class Apple {
         this.respawn();
     }
 }
+
+
+class AppleArray {
+    constructor(count) {
+        if (!this.apples) {
+            this.apples = [];
+        }
+        for (let i = 0; i < count; i++) {
+            this.apples.push(new Apple());
+        }
+    }
+
+    draw() {
+        this.apples.forEach((apple) => {
+            apple.draw();
+        });
+    }
+}
