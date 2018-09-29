@@ -17,20 +17,20 @@ class UserSettings {
     }
 
     import () {
-        let { boardWidth, boardHeight, gameLevel, snakeSpeed, snakeLength, appleCount } = this.getFromStorage();
-        this.configure(boardWidth, boardHeight, gameLevel, snakeSpeed, snakeLength, appleCount);
+        let { width, height, level, speed, length, apples } = this.getFromStorage();
+        this.configure(width, height, level, speed, length, apples);
     }
 
     configure(width = MIN_WIDTH, height = MIN_HEIGHT, level = MIN_LEVEL, speed = MIN_SPEED, length = MIN_LENGTH, apples = MIN_APPLES) {
-        this.boardWidth = width - (width % SCALE);
-        this.boardHeight = height - (height % SCALE);
-        this.gameLevel = level;
-        this.snakeSpeed = Math.floor(speed);
-        this.snakeLength = Math.floor(length);
-        this.appleCount = Math.floor(apples);
+        this.width = width - (width % SCALE);
+        this.height = height - (height % SCALE);
+        this.level = level;
+        this.speed = Math.floor(speed);
+        this.length = Math.floor(length);
+        this.apples = Math.floor(apples);
     }
 
     load(func) {
-        func(this.boardWidth, this.boardHeight, this.gameLevel, this.snakeSpeed, this.snakeLength, this.appleCount);
+        func(this.width, this.height, this.level, this.speed, this.length, this.apples);
     }
 }

@@ -84,7 +84,7 @@ class Snake {
 
         this.eats(newHead, appleArr);
 
-        if (this.collision(newHead, this.body)) {
+        if (this.collision(newHead, this.body)) { // ??? make newhead as this properties
             game.stop();
         }
 
