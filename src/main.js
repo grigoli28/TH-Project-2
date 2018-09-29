@@ -2,16 +2,11 @@ const APPLE_SCORE = 10;
 
 const STORAGE = window.localStorage;
 
-let saveBtn,
-    playBtn,
-    userInterface;
+let saveBtn, playBtn, sound,
+    soundBtn, userInterface;
 
-let widthInput,
-    heightInput,
-    levelInput,
-    speedInput,
-    lengthInput,
-    appleInput;
+let widthInput, heightInput, levelInput,
+    speedInput, lengthInput, appleInput;
 
 let canvas,
     ctx;
@@ -19,11 +14,7 @@ let canvas,
 let highScoreEl,
     currScoreEl;
 
-let game;
-
-let snake;
-
-let apples;
+let game, snake, apples;
 
 let score = 0;
 
@@ -62,10 +53,8 @@ eat.src = 'audio/eat.mp3';
 
 let soundEnabled = true;
 
-let fpsInterval;
-let now;
-let then;
-let elapsed;
+
+let fpsInterval, now, then, elapsed;
 
 
 let stopAnimID;
@@ -80,7 +69,7 @@ window.onload = function() {
     saveBtn = document.getElementById('save');
     playBtn = document.getElementById('play');
 
-    sound = document.getElementById('sound');
+    sound = document.getElementById('sound'); // ???
     soundBtn = document.getElementById('sound-control');
 
     userInterface = document.getElementById('userInterface');

@@ -23,7 +23,7 @@ function loadUserInterface() {
         } else {
             if (confirm('Your Settings Are Invalid! Load Defaults?')) {
                 // Load previous settings
-                settings.load(loadInBrowser); // !!!review
+                settings.load(loadInBrowser);
             }
         }
     });
@@ -56,7 +56,8 @@ function saveSettings() {
         heightInput.value,
         levelInput.value,
         speedInput.value,
-        lengthInput.value
+        lengthInput.value,
+        appleInput.value
     );
     settings.saveToStorage();
 }
