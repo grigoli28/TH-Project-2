@@ -1,10 +1,11 @@
 const BODY_COLOR = 'rgb(0, 155, 0)';
-const HEAD_COLOR = 'rgb(0, 80, 0)';
+// const HEAD_COLOR = 'rgb(0, 80, 0)';
 const STROKE_COLOR = 'white';
 
 
 class Snake {
-    constructor(length = DEFAULT.length) {
+    constructor(length = DEFAULT.length, speed = DEFAULT.speed) {
+        this.speed = speed;
         this.body = [];
         this.direction = 'UP';
         for (let i = 1; i <= length; i++) {
@@ -20,10 +21,23 @@ class Snake {
 
     draw() {
         this.body.forEach((bodyPart, index) => {
-            ctx.fillStyle = (index == 0) ? BODY_COLOR : BODY_COLOR;
-            ctx.strokeStyle = STROKE_COLOR;
-            ctx.fillRect(bodyPart.x, bodyPart.y, SCALE, SCALE);
-            ctx.strokeRect(bodyPart.x, bodyPart.y, SCALE, SCALE);
+            ctx.beginPath();
+            ctx.fillStyle = BODY_COLOR;
+
+            // Draw Rounded rectangle
+            ctx.beginPath();
+            ctx.moveTo(bodyPart.x + SCALE / 4, bodyPart.y);
+            ctx.lineTo(bodyPart.x + SCALE * 3 / 4, bodyPart.y);
+            ctx.quadraticCurveTo(bodyPart.x + SCALE, bodyPart.y, bodyPart.x + SCALE, bodyPart.y + SCALE / 4);
+            ctx.lineTo(bodyPart.x + SCALE, bodyPart.y + SCALE * 3 / 4);
+            ctx.quadraticCurveTo(bodyPart.x + SCALE, bodyPart.y + SCALE, bodyPart.x + SCALE * 3 / 4, bodyPart.y + SCALE);
+            ctx.lineTo(bodyPart.x + SCALE / 4, bodyPart.y + SCALE);
+            ctx.quadraticCurveTo(bodyPart.x, bodyPart.y + SCALE, bodyPart.x, bodyPart.y + SCALE * 3 / 4);
+            ctx.lineTo(bodyPart.x, bodyPart.y + SCALE / 2);
+            ctx.quadraticCurveTo(bodyPart.x, bodyPart.y, bodyPart.x + SCALE / 4, bodyPart.y);
+            ctx.fill();
+            ctx.closePath();
+
             if (index == 0) {
                 /* Left Eye Outer Circle */
                 ctx.beginPath();
