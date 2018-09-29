@@ -2,8 +2,7 @@ const APPLE_SCORE = 10;
 
 const STORAGE = window.localStorage;
 
-let saveBtn, playBtn, sound,
-    soundBtn, userInterface;
+let saveBtn, playBtn, soundBtn, userInterface;
 
 let widthInput, heightInput, levelInput,
     speedInput, lengthInput, appleInput;
@@ -54,7 +53,6 @@ window.onload = function() {
     saveBtn = document.getElementById('save');
     playBtn = document.getElementById('play');
 
-    sound = document.getElementById('sound'); // ???
     soundBtn = document.getElementById('sound-control');
 
     userInterface = document.getElementById('userInterface');
@@ -78,7 +76,6 @@ window.onload = function() {
     });
 
 
-    sound.addEventListener('click', soundControl);
     soundBtn.addEventListener('click', soundControl);
 };
 
@@ -149,7 +146,8 @@ function displayCurrScore() {
 
 
 function displayHighscore() {
-    highScoreEl.textContent = Game.getHighscore();
+    if (Game.getHighscore() > 0)
+        highScoreEl.textContent = Game.getHighscore();
 }
 
 

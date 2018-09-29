@@ -4,8 +4,7 @@ const STROKE_COLOR = 'white';
 
 
 class Snake {
-    constructor(length = DEFAULT.length, speed = DEFAULT.speed) {
-        this.speed = speed; // ???
+    constructor(length = DEFAULT.length) {
         this.body = [];
         this.direction = 'UP';
         for (let i = 1; i <= length; i++) {
@@ -84,7 +83,7 @@ class Snake {
 
         this.eats(newHead, appleArr);
 
-        if (this.collision(newHead, this.body)) { // ??? make newhead as this properties
+        if (this.collision(newHead, this.body)) {
             game.stop();
         }
 

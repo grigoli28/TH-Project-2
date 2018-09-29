@@ -16,11 +16,11 @@
             <div>
                 <!-- High Score -->
                 <div class="flex-cont">
-                    <span>High Score&nbsp;<i class="fas fa-trophy"></i></span><b id="highScore"></b>
+                    <b class="highscore"></b><b id="highScore"></b>
                 </div>
                 <!-- Current Score -->
                 <div class="flex-cont">
-                    <span>Your Score:&nbsp;<i class="fas fa-apple-alt"></i></span><b id="myScore"></b>
+                    <b class="currentScore"></b><b id="myScore"></b>
                 </div>
                 <div class="flex-cont">
                     <!-- Level -->
@@ -57,7 +57,7 @@
                 </div>
                 <!-- Save Button -->
                 <div class="flex-cont">
-                    <button id="save">Save Settings</button>
+                    <div id="save" class="btn">Save Settings</div>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
 
     <div class="container flex-cont">
         <div class="flex-cont">
-            <button id="play" class="hidden">Start Game</button>
+            <div id="play" class="btn hidden">Start Game</div>
             <canvas id="snakeGame" class="hidden" width="400" height="400"></canvas>
         </div>
     </div>

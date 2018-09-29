@@ -49,6 +49,35 @@ select {
 }
 
 
+/* Buttons */
+
+.btn {
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: all .2s ease-in-out;
+    white-space: nowrap;
+    background-color: lightseagreen;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: green;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#play,
+#save {
+    padding: 5px;
+}
+
+#play:hover,
+#save:hover {
+    cursor: pointer;
+}
+
+
 /* Game */
 
 #snakeGame {
@@ -63,9 +92,18 @@ select {
 
 /* Sound */
 
+#sound-control {
+    opacity: 0.5;
+}
+
+#sound-control:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
 .sound-on,
 .sound-off {
-    padding: 5px;
+    padding: 10px;
 }
 
 .sound-on::before {
@@ -78,4 +116,28 @@ select {
     content: "\f026";
     font-family: "Font Awesome\ 5 Free";
     font-weight: 900;
+}
+
+
+/* Scores */
+
+.highscore,
+.currentScore {
+    margin: 10px;
+}
+
+.highscore::before {
+    content: "\f091";
+    font-family: "Font Awesome\ 5 Free";
+    font-weight: 900;
+    font-size: 2em;
+    color: orange;
+}
+
+.currentScore::before {
+    content: "\f5d1";
+    font-family: "Font Awesome\ 5 Free";
+    font-weight: 900;
+    font-size: 2em;
+    color: red;
 }
