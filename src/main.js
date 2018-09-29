@@ -14,19 +14,7 @@ let canvas,
 let highScoreEl,
     currScoreEl;
 
-let game, snake, appleArr;
-
-let score = 0;
-
-let gameEnded = false;
-
-
-let defaultLevelSpeed = {
-    'novice': 10,
-    'intermediate': 20,
-    'hard': 30
-};
-
+let game, snake, appleArr, score;
 
 let directionKeyMap = {
     '38': 'UP', // arrow
@@ -40,10 +28,8 @@ let directionKeyMap = {
 };
 
 
-
 let appleImg = new Image();
 appleImg.src = 'img/apple.png';
-
 
 let dead = new Audio();
 let eat = new Audio();
@@ -53,15 +39,14 @@ eat.src = 'audio/eat.mp3';
 
 let soundEnabled = true;
 
-
 let fpsInterval, now, then, elapsed;
-
 
 let stopAnimID;
 
 
 window.onload = function() {
-    document.body.style.height = `${window.innerHeight}px`; // Give body max visible height, so we can display canvas in the center of screen
+    // Give body max visible height, so we can display canvas in the center of screen
+    document.body.style.height = `${window.innerHeight}px`;
 
     canvas = document.getElementById('snakeGame');
     ctx = canvas.getContext('2d');
@@ -89,8 +74,7 @@ window.onload = function() {
     saveBtn.addEventListener('click', preloadGameData);
 
     playBtn.addEventListener('click', () => {
-        hidePlayBtn();
-        startAnimating(defaultLevelSpeed[settings.level]);
+        game.start();
     });
 
 
@@ -100,9 +84,11 @@ window.onload = function() {
 
 
 function preloadGameData() {
-    game = new Game();
+    score = 0;
 
-    snake = new Snake(settings.length);
+    game = new Game(Game.getHighscore());
+
+    snake = new Snake(settings.length, settings.speed);
 
     appleArr = new AppleArray(settings.apples);
 
@@ -110,6 +96,7 @@ function preloadGameData() {
 }
 
 
+// Enables us to control frame per second (Snake speed)
 function startAnimating(fps) {
     fpsInterval = 1000 / fps;
     then = window.performance.now();
@@ -161,8 +148,21 @@ function displayCurrScore() {
 }
 
 
+function displayHighscore() {
+    highScoreEl.textContent = Game.getHighscore();
+}
+
+
 function hidePlayBtn() {
     playBtn.classList.add('hidden');
+}
+
+
+function updateHighscore() {
+    if (score > game.highscore) {
+        game.highscore = score;
+        game.saveHighscore();
+    }
 }
 
 

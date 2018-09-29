@@ -4,8 +4,8 @@ const STROKE_COLOR = 'white';
 
 
 class Snake {
-    constructor(length = 3, speed = 1) {
-        this.speed = speed;
+    constructor(length = DEFAULT.length, speed = DEFAULT.speed) {
+        this.speed = speed; // ???
         this.body = [];
         this.direction = 'UP';
         for (let i = 1; i <= length; i++) {

@@ -21,7 +21,7 @@ class UserSettings {
         this.configure(width, height, level, speed, length, apples);
     }
 
-    configure(width = MIN_WIDTH, height = MIN_HEIGHT, level = MIN_LEVEL, speed = MIN_SPEED, length = MIN_LENGTH, apples = MIN_APPLES) {
+    configure(width = DEFAULT.width, height = DEFAULT.height, level = DEFAULT.level, speed = DEFAULT.speed, length = DEFAULT.length, apples = DEFAULT.apples) {
         this.width = width - (width % SCALE);
         this.height = height - (height % SCALE);
         this.level = level;
@@ -32,5 +32,9 @@ class UserSettings {
 
     load(func) {
         func(this.width, this.height, this.level, this.speed, this.length, this.apples);
+    }
+
+    defaults() {
+        this.configure();
     }
 }

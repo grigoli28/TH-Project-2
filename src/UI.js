@@ -2,16 +2,22 @@ const SCALE = 15;
 
 const MAX_WIDTH = window.innerWidth;
 const MAX_HEIGHT = window.innerHeight;
-const MAX_SPEED = 50; // ???
 const MAX_APPLES = 20;
-const MAX_LENGTH = Math.floor(MAX_WIDTH / SCALE / 5); // ???
+const MAX_LENGTH = Math.floor(MAX_WIDTH / SCALE / 5);
 
-const MIN_WIDTH = 300;
-const MIN_HEIGHT = 300;
-const MIN_SPEED = 5; // ???
+const MIN_WIDTH = 350;
+const MIN_HEIGHT = 350;
 const MIN_APPLES = 1;
 const MIN_LENGTH = 3;
-const MIN_LEVEL = 'novice';
+
+const DEFAULT = {
+    width: 450,
+    height: 450,
+    level: 'novice',
+    speed: 10,
+    length: 3,
+    apples: 1
+};
 
 const SPEED_BY_LEVEL = {
     'novice': {
@@ -30,6 +36,7 @@ const SPEED_BY_LEVEL = {
 
 let settings;
 
+let highScore;
 
 function loadUserInterface() {
     saveBtn.addEventListener('click', () => {
@@ -38,12 +45,15 @@ function loadUserInterface() {
         } else {
             if (confirm('Your Settings Are Invalid! Load Defaults?')) {
                 // Load previous settings
+                settings.defaults();
                 settings.load(loadInBrowser);
             }
         }
     });
 
-    levelInput.addEventListener('input', setSpeedLimits);
+    displayHighscore();
+
+    levelInput.addEventListener('input', setSpeedLimits, true);
 
     settings = new UserSettings();
 
@@ -58,7 +68,7 @@ function loadUserInterface() {
 
 
 function saveConfiguration() {
-    saveSettings();
+    configureAndSave();
     hideUI();
     showCanvas();
     setCanvasDimensions(settings.width, settings.height);
@@ -66,7 +76,7 @@ function saveConfiguration() {
 }
 
 
-function saveSettings() {
+function configureAndSave() {
     // Save settings from inputs
     settings.configure(
         widthInput.value,
@@ -83,7 +93,7 @@ function saveSettings() {
 function inputIsValid() {
     if (widthInput.value < MIN_WIDTH || widthInput.value > MAX_WIDTH ||
         heightInput.value < MIN_HEIGHT || heightInput.value > MAX_HEIGHT ||
-        speedInput.value < MIN_SPEED || speedInput.value > MAX_SPEED ||
+        speedInput.value < SPEED_BY_LEVEL[settings.level].min || speedInput.value > SPEED_BY_LEVEL[settings.level].max ||
         lengthInput.value < MIN_LENGTH || lengthInput.value > MAX_LENGTH ||
         appleInput.value < MIN_APPLES || appleInput.value > MAX_APPLES) {
         return false;
@@ -119,10 +129,17 @@ function loadInBrowser(width, height, level, speed, length, apples) {
 
 
 function setSpeedLimits() {
+    settings.configure(
+        widthInput.value,
+        heightInput.value,
+        levelInput.value,
+        speedInput.value,
+        lengthInput.value,
+        appleInput.value
+    );
     speedInput.max = SPEED_BY_LEVEL[settings.level].max;
     speedInput.min = SPEED_BY_LEVEL[settings.level].min;
     speedInput.value = SPEED_BY_LEVEL[settings.level].min;
-    console.log(settings.level);
 }
 
 

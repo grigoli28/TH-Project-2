@@ -1,24 +1,30 @@
 class Game {
-    constructor(highscore = 0) {
+    constructor(highscore) {
         this.highscore = highscore;
+        this.over = false;
     }
 
-    get highscore() {
-        return this._highscore;
+    static getHighscore() {
+        return Number(STORAGE.getItem('snake_highscore'));
     }
 
-    set highscore(score) {
-        if (!isNaN(score) && score > 0 && score > this.highscore) {
-            this._highscore = score;
-        }
+    saveHighscore() {
+        STORAGE.setItem('snake_highscore', this.highscore);
+    }
+
+    start() {
+        hidePlayBtn();
+        startAnimating(snake.speed);
     }
 
     stop() {
-        this.over = true;
         if (soundEnabled)
             dead.play();
+        this.over = true;
         drawGameOver();
-        showInterface();
         displayCurrScore();
+        updateHighscore();
+        displayHighscore();
+        showInterface();
     }
 }
