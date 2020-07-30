@@ -1,5 +1,5 @@
 # Snake Game Project
-[:snake: **Play Game**](https://grigoli28.github.io/TH-Project-2/)
+[:snake: **Play Game**](https://grigoll.github.io/TH-Project-2/)
 
 ### Description:
 
